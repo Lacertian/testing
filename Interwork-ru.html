@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Interwork</title>
+        <meta name="description" content="#">
+        <link rel="stylesheet" href="Interwork.css">
+       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js">
+    </script>
+           <script src="responsiveMenu.js"></script>
+      <script src="tabs.js"></script>
+        <script src="language.js"></script>
+        <script src="remove.js"></script>
+       <!-- <script src="snowman.js"></script>-->
+    </head>
+    <body>
+   
+        <div class="wrapper">
+        <header>
+                <div class="Logotype">
+                <a href="/"><img src="logo.png" alt="Interwork logo"></a>  
+                <ul class="Language">
+                    <li><a class="rus" href="#ru" data-lang='ru'>RU</a></li>
+                    <li><a class="eng" href="#en" data-lang='en'>EN</a></li>
+                    <li><a class="ua" href="#ua" data-lang='ua'>UA</a></li> 
+                    <li><a class="deu" href="#deu" data-lang='de'>DE</a></li>
+                                    
+                    </ul>
+            </div>
+            <nav>
+              
+            <a href="#" class="menu-trigger">Menu</a>
+            <ul class="menu">
+                
+                    <li><a href="#rabot" data-hover="Соискателю" >Соискателю</a></li>
+                    <li><a href="#rabot"data-hover="Работодателю">Работодателю</a></li>
+                    <li><a href="#resume"data-hover="Разместить резюме">Разместить резюме</a></li>
+                    <li><a href="#enter"data-hover="Войти">Войти</a></li>
+                </ul>
+                  
+                </nav>
+<!--
+            <nav class="clearfix">
+                    <a href="#" id="pull">Menu</a>
+             <ul class="clearfix">
+                
+                    <li><a href="#rabot" data-hover="Соискателю" >Соискателю</a></li>
+                    <li><a href="#rabot"data-hover="Работодателю">Работодателю</a></li>
+                    <li><a href="#resume"data-hover="Разместить резюме">Разместить резюме</a></li>
+                    <li><a href="#enter"data-hover="Войти">Войти</a></li>
+                </ul>
+            
+                  
+                </nav>
+                
+-->
+            
+            <!--<ul class="menu1">
+                   
+                    <li class="language">Язык<ul class="choice">
+                        <li><a href="/russian/">Русский</a></li>
+                        <li><a href="/">English</a></li>
+                        <li><a href="/">Deutsch</a></li>
+                        <li><a href="/">Українська</a></li>
+                        </ul>
+                       </li>
+            </ul>-->
+             
+        </header>
+        <div class="content">
+            
+                <ul class="tabNavigation">
+                    <li><a href="#first">Ваши резюме</a></li>
+                    <li><a href="#second">Поисковые агенты</a></li>
+                    <li><a href="#third">Сопроводительные письма</a></li>
+                </ul>
+            
+        <div id="first">
+        <h2>Coming soon...</h2>
+        </div>
+          
+            <div id="second">
+                <canvas id="myCanvas" width="300" height="300" style="border-style: solid;"></canvas>
+ 
+    <script>
+        function createScene()
+        {
+            var canvas = document.getElementById("myCanvas");
+ 
+            var renderer = new THREE.WebGLRenderer({ antialias: true, canvas: canvas });
+            renderer.setClearColor(new THREE.Color(0x00bfff));
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            renderer.shadowMapEnabled = true;
+ 
+            var scene = new THREE.Scene();
+ 
+            var camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight);
+            camera.position.set(2, 2, 6.5);
+            scene.add(camera);
+ 
+            var orbitControls = new THREE.OrbitControls(camera, renderer.domElement);
+            orbitControls.target.set(1.2, 1, 0);
+ 
+            var light = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(light);
+ 
+            var light2 = new THREE.DirectionalLight(0xffffff, 1);
+            light2.position.set(3, 2, 3);
+            light2.castShadow = true;
+            scene.add(light2);
+ 
+            var groundGeometry = new THREE.PlaneGeometry(60, 40, 1, 1);
+            var groundMaterial = new THREE.MeshPhongMaterial({ color: 0xcccccc });
+            var ground = new THREE.Mesh(groundGeometry, groundMaterial);
+            ground.rotation.x = -90 * Math.PI / 180;
+            ground.receiveShadow = true;
+            scene.add(ground);
+ 
+            function render()
+            {
+                orbitControls.update();
+                renderer.render(scene, camera);
+                requestAnimationFrame(render);
+            }
+            render();
+ 
+            return scene;
+        }
+ 
+        function drawSnowman(x, y, z, scene)
+        {
+            var bodyRadius = 1;
+            var body = new THREE.Mesh(new THREE.SphereGeometry(bodyRadius, 16, 16), new THREE.MeshPhongMaterial());
+            body.position.set(x, y + bodyRadius, z);
+            body.castShadow = true;
+            body.receiveShadow = true;
+            scene.add(body);
+ 
+            var headRadius = 0.5;
+            var head = new THREE.Mesh(new THREE.SphereGeometry(headRadius, 16, 16), new THREE.MeshPhongMaterial());
+            head.position.set(x, y + bodyRadius * 2 + headRadius - headRadius / 5, z);
+            head.castShadow = true;
+            head.receiveShadow = true;
+            scene.add(head);
+ 
+            var noseHeight = 0.5;
+            var nose = new THREE.Mesh(new THREE.ConeGeometry(0.2, 1, 16), new THREE.MeshPhongMaterial({ color: 0xffa500 }));
+            nose.position.set(x, head.position.y, z + headRadius);
+            nose.rotation.x = 90 * Math.PI / 180;
+            nose.castShadow = true;
+            nose.receiveShadow = true;
+            scene.add(nose);
+ 
+            var eyeRadius = 0.07;
+            var eyeAngle = 35;
+ 
+            var leftEye = new THREE.Mesh(new THREE.SphereGeometry(eyeRadius), new THREE.MeshPhongMaterial({ color: 0x000000 }));
+            leftEye.position.set(
+                x + headRadius * Math.sin(THREE.Math.degToRad(eyeAngle)) * Math.cos(THREE.Math.degToRad(eyeAngle)),
+                headRadius * Math.sin(THREE.Math.degToRad(eyeAngle)) * Math.sin(THREE.Math.degToRad(eyeAngle)) + head.position.y,
+                z + headRadius * Math.cos(THREE.Math.degToRad(eyeAngle)));
+            scene.add(leftEye);
+ 
+            var rightEye = new THREE.Mesh(new THREE.SphereGeometry(eyeRadius), new THREE.MeshPhongMaterial({ color: 0x000000 }));
+            rightEye.position.set(
+                x + headRadius * Math.sin(THREE.Math.degToRad(-eyeAngle)) * Math.cos(THREE.Math.degToRad(-45)),
+                headRadius * Math.sin(THREE.Math.degToRad(-eyeAngle)) * Math.sin(THREE.Math.degToRad(-eyeAngle)) + head.position.y,
+                z + headRadius * Math.cos(THREE.Math.degToRad(-eyeAngle)));
+            scene.add(rightEye);
+ 
+            var buttonRadius = 0.1;
+            var buttonAngle = 25;
+ 
+            var button0 = new THREE.Mesh(new THREE.SphereGeometry(buttonRadius), new THREE.MeshPhongMaterial({ color: 0x000000 }));
+            button0.position.set(
+                x,
+                bodyRadius * Math.sin(THREE.Math.degToRad(buttonAngle)) + body.position.y,
+                z + bodyRadius * Math.cos(THREE.Math.degToRad(buttonAngle)));
+            scene.add(button0);
+ 
+            var button1 = new THREE.Mesh(new THREE.SphereGeometry(buttonRadius), new THREE.MeshPhongMaterial({ color: 0x000000 }));
+            button1.position.set(
+                x,
+                body.position.y,
+                z + bodyRadius);
+            scene.add(button1);
+ 
+            var button2 = new THREE.Mesh(new THREE.SphereGeometry(buttonRadius), new THREE.MeshPhongMaterial({ color: 0x000000 }));
+            button2.position.set(
+                x,
+                bodyRadius * Math.sin(THREE.Math.degToRad(-buttonAngle)) + body.position.y,
+                z + bodyRadius * Math.cos(THREE.Math.degToRad(-buttonAngle)));
+            scene.add(button2);
+        }
+ 
+        var scene = createScene();
+ 
+        drawSnowman(0, 0, 0, scene);
+        drawSnowman(2.5, 0, 1.5, scene);
+    </script>
+              <!-- <canvas id="canvas" width="200" height="200" style="border-style: solid;"></canvas>
+ 
+        <script type="text/javascript">
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+         
+            var circle = function (x, y, radius, fillCircle) {
+              ctx.beginPath();
+              ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+              if (fillCircle) {
+                ctx.fill();
+              } else {
+                ctx.stroke();
+              }
+            };
+         
+            var drawSnowman = function (x, y) {
+              ctx.fillStyle = "Blue";
+              ctx.lineWidth = 4;
+         
+              circle(x + 50, y + 110, 40, false);
+              circle(x + 50, y + 40, 30, false);
+              circle(x + 40, y + 35, 5, true);
+              circle(x + 60, y + 35, 5, true);
+         
+              circle(x + 50, y + 90, 5, true);
+              circle(x + 50, y + 110, 5, true);
+              circle(x + 50, y + 130, 5, true);
+         
+              ctx.fillStyle = "Orange";
+              circle(x + 50, y + 45, 5, true);
+            };
+         
+            drawSnowman(0, 0);
+            drawSnowman(100, 20);
+        </script>-->
+            </div>
+            <div id="third">
+      
+                <div class="message">
+                    <h3>Добавить сопроводительное письмо</h3>
+                    
+                    <form id=data action="#" enctype="text/plain" method="post" target="_self" >
+                       <input type="text" spellcheck="true" placeholder="Название" autofocus required> 
+                       <textarea  name="text" required wrap="hard" spellcheck="true" placeholder="Текст"></textarea>
+                       <button type="submit" form="data" autofocus>Сохранить сопроводительное письмо</button>
+                        </form>
+                    
+                </div>
+                <div class="allletters">
+                    <h3>Сопроводительные письма</h3>
+                    <div class="letters">
+                        
+                          <div id="let_1">
+                           <p>&#9993;  Название письма</p>
+                           <p>Добавлено 26.07.2015</p> 
+                           
+                        <p><button type="btn">Просмотр</button>
+                       <button type="btn" >Редактирование</button>
+                        <button type="btn" class="delete" form="delete">Удалить</button></p>
+                        </div>
+                        
+                        
+                         <div id="let_2">   
+                           <p>&#9993;  Название письма</p>
+                           <p>Добавлено 26.07.2015</p> 
+                        
+                       <p> <button type="btn">Просмотр</button>
+                       <button type="btn" >Редактирование</button>
+                        <button type="btn" >Удалить</button></p>
+                          </div>
+                       
+                         <div id="let_3">   
+                              <p>&#9993;  Название письма</p>
+                              <p>Добавлено 26.07.2015</p> 
+                        
+                        <p><button type="btn">Просмотр</button>
+                       <button type="btn">Редактирование</button>
+                        <button type="btn">Удалить</button></p>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <footer>
+            <div class="down">
+
+  
+            <div class="social">
+                <p>+38(050)692-56-52</p>
+                <p>interwork@gmail.com</p>
+                <ul>
+                 <li><a href="http://twitter.com/" class="social-icon twitter"><img src="Twitter.png" alt="Twitter"></a></li>
+                 <li><a href="http://facebook.com/" class="social-icon facebook"><img src="Facebook.png" alt="Facebook"></a></li>
+                 <li><a href="http://plus.google.com/" class="social-icon google-plus"><img src="Google.png" alt="Google+"></a></li>
+                 <li><a href="http://instagram.com/" class="social-icon-small instagram"><img src="Instagram.png" alt="Instagram"></a></li>
+                 <li><a href="http://flickr.com/" class="social-icon flickr"><img src="Flickr.png" alt="Flickr"></a></li>    
+                </ul>
+                
+        </div>
+ <div class="list">
+       
+            <div class="column about">
+            <h4>О нас</h4>
+               <a href="#" class="about-trigger">О нас</a>
+            <ul>
+                      <li><a href="/home/">О сайте</a></li>
+                      <li><a href="/about/">Карта сайта</a></li>
+                      <li><a href="/services/">Как пользоваться сайтом</a></li>
+                      <li><a href="/home/">Прайс-лист</a></li>
+                      <li><a href="/about/">Брендированные страницы</a></li>
+                      <li><a href="/services/">Пользовательское соглашение</a></li>
+            </ul>
+            </div>
+           <div class="column soisk">
+               <h4>Соискателям</h4>
+               <a href="#" class="soisk-trigger">Соискателям</a>
+                 <ul>
+                     <li><a href="/home/">Создать резюме</a></li>
+                     <li><a href="/home/">Найти вакансии</a></li>
+                     <li><a href="/home/">Расширенный поиск</a></li>
+                     <li><a href="/home/">Примеры резюме</a></li>
+                     <li><a href="/home/">Правила размещения</a></li>                        
+                </ul>
+            </div>
+            <div class="column rabotod">
+                <h4>Работодателям</h4>
+                <a href="#" class="rabotod-trigger">Работодателям</a>
+                 <ul>
+                     <li><a href="/home/">Зарегистрироваться</a></li>
+                     <li><a href="/home/">Разместить вакансии</a></li>
+                     <li><a href="/home/">Найти сотрудников</a></li>
+                     <li><a href="/home/">Поиск по профессиям</a></li>
+                     <li><a href="/home/">Правила размещения</a></li>                        
+                </ul>
+            </div>
+        
+        </div>
+                </div>
+        </footer>
+            
+    </body>
+</html>
