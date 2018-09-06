@@ -222,96 +222,7 @@ nav ul{
   
 }
 
-/*
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
-.clearfix:after {
-    clear: both;
-}
-.clearfix {
-    *zoom: 1;
-}
-#pull {
-  display:none;
-  color:#fff;
-}
-@media only screen and (max-width : 700px) {
-  nav {
-    border-bottom: 0;
-  }
-  .clearfix ul {
-    display: none;
-    height: auto;
-  }
-  nav a#pull {
-    display: flex;
-      justify-content: center;
-    background-color: transparent;
-    width: 100%;
-      margin-top: 20px;
-    position: relative;
-      
-  }
-  nav a#pull:after {
-  
-    display: inline-block;
-    position: absolute;
-    right: 50px;
-    top: 5px;
-  }
-}
 
-@media only screen and (max-width : 320px) {
-  nav li {
-    display: block;
-    float: none;
-    width: 100%;
-  }
- 
-}
-@media only screen and (max-width : 400px) {
-  nav li {
-    display: block;
-    float: none;
-    width: 100%;
-      margin-bottom: 15px;
-  }
- 
-}
-*/
-/*.menu-trigger {
-  display:none;
-  color:#fff;
-}
-
-@media screen and (max-width:700px) {
-  .menu-trigger {
-    display:flex;
-      justify-content: space-around;
-       position: relative;
-  }
-    .menu {
-    border: none;
-    position: absolute;
-    transition: 0.6s opacity;
-    background: #2a5d40;
-}
-.menu-trigger:hover .menu{
-    opacity: 1;
-    left: 0;
-}
-
-    nav ul li {
-    display:flex;
-    border-top:1px #79896D solid;    
-  }
-  nav ul {
-    display:none;
-  }
-}*/
 .tabNavigation {
     display: flex;
     flex-wrap: wrap;
@@ -324,13 +235,7 @@ nav ul{
     padding: 15px; 
 }
 
-/*.submenu ul{
-    width: 95%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    
-}*/
+
 #third{
     display: flex;
     flex-wrap: wrap;
@@ -382,39 +287,7 @@ h3 {
 }
 
 
-/*.menu1 li {
-    font: 12px Comic Sans MS, regular; 
-	padding: 10px 25px;
-	margin: 0;
-} 
-.language {
-    position: relative;
-}
-.choice {
-    border: none;
-    position: absolute;
-    opacity: 0;
-    left: -9999em;
-    transition: 0.6s opacity;
-}
-.language:hover{
-    border-bottom: 1px dotted;
-    	transition: 0.6s all;
-}
-.language:hover .choice{
-    opacity: 1;
-    left: 0;
-}
-.menu1 a:hover {
-   padding: 5px;
-   background: transparent; 
-   transition: 0.6s all;
-}*/
-/*.message {
-    width: 80%;
-	margin: auto;
-    
-}*/
+
 .message form{
      display: flex;
      flex-direction: column;
